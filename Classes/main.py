@@ -5,7 +5,7 @@
 import math
 
 
-class Domino():
+class Domino:
 
     def __init__(self, r, t):
         self.A = r
@@ -21,7 +21,7 @@ class Domino():
         print("la face est A est : " + str(self.A) + " et la B est : " + str(self.B))
 
 
-class CompteBancaire():  # Exercice 2
+class CompteBancaire:  # Exercice 2
 
     def __init__(self, n, s=0):  # n = Nom et s = solde
         self.Nom = n
@@ -41,7 +41,7 @@ class CompteBancaire():  # Exercice 2
         print("C'est le compte de : " + str(self.Nom) + " Avec un solde de : " + str(self.Solde))
 
 
-class TableMultiplication():  # Exercice 3
+class TableMultiplication:  # Exercice 3
 
     def __init__(self, v):  # init de la table
         self.table = v
@@ -58,7 +58,7 @@ class TableMultiplication():  # Exercice 3
         print("C'est la table de " + str(self.table))
 
 
-class Fraction():  # Exercice 4
+class Fraction:  # Exercice 4
 
     def __init__(self, v1, v2):  # Initialisation des variables de Fractions
         self.num = v1
@@ -108,7 +108,7 @@ class Fraction():  # Exercice 4
         print("La valeur est de " + str(self.num) + "/" + str(self.denom))
 
 
-class Poly():
+class Poly:
 
     def __init__(self, *args):  # Initialisation de Poly
         self.coeficient = []
@@ -137,22 +137,44 @@ class Poly():
                 self.sum = self.sum + ((var * puiss) * i)
         print("Evaluate via enumerate : " + str(self.sum))
 
-    def __add__(self, other):
-        if len(self.list) > len(other.list):
+    def __add__(self, other):  # égale à Poly()1 + Poly()2 => addition de deux objets Poly
+        Poly.coeficient = []
+        if len(self.list) >= len(other.list):
             print("p1 plus grand")
             for i in range(len(self.list)):
-                if other.list[i] in globals():
+                try:
                     Poly.coeficient.append(self.list[i] + other.list[i])
-                else:
+                except IndexError:
                     Poly.coeficient.append(self.list[i])
         else:
             print("p2 plus grand")
-            Poly.coeficient = []
             for i in range(len(other.list)):
                 try:
                     Poly.coeficient.append(other.list[i] + self.list[i])
                 except IndexError:
                     Poly.coeficient.append(other.list[i])
+
+        return Poly(Poly.coeficient)
+
+    def __mul__(self, other):
+        Poly.coeficient = []
+        if len(self.list) > len(other.list):
+            print("p1 plus grand")
+            for i in range(len(self.list)):
+                try:
+                    Poly.coeficient.append(self.list[i] * other.list[i])
+                except IndexError:
+                    Poly.coeficient.append(self.list[i])
+        else:
+            print("p2 plus grand")
+            for j in range(len(self.list)+1):
+                for i in range(len(other.list)):
+                    try:
+                        print(i)
+                        temp = (other.list[j] * self.list[i])
+                    except IndexError:
+                        temp = other.list[j]
+                    Poly.coeficient.append(temp)
 
         return Poly(Poly.coeficient)
 
@@ -194,12 +216,15 @@ compte1.__repr__()
 tab.__repr__()
 g.__repr__()
 # Exercice 6
-p1 = Poly(3, 4, -2)
-p1.coef()
-p1.evaluate(2)
-p1.evaluatte(2)
+p = Poly(3, 4, -2)
+p.coef()
+p.evaluate(2)
+p.evaluatte(2)
 # Exo 6 Bonus
-p2 = Poly(3, -3, 2, 1)
+p1 = Poly(1, 4)
+p2 = Poly(3, -3, 2)
 p3 = p1 + p2
 p3.coef()
+p4 = p1 * p2
+p4.coef()
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
