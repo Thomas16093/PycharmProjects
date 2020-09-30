@@ -47,11 +47,9 @@ def move(temp):  # Deplacements des Asteroids
 
 def forget(temp):  # supprimer les asteroids de l'affichage
     for i in range(len(aster)):
-        print(aster)
         C.delete(aster[0])
         # aster[i] = 0
         del aster[0]
-    print("\n")
 
 
 def move_up(temp):  # Deplacement vers le haut de la fusée
@@ -104,12 +102,12 @@ class Life(Thread):
         Thread.__init__(self)
 
     def run(self):
-        time.sleep(0.5)
+        time.sleep(1)
         t3 = Deplacement()
         t4 = Appear()
         t3.start()
         t4.start()
-        vie = 3
+        vie = 30
         while t1.is_alive():
             time.sleep(0.2)
             try:
@@ -190,7 +188,7 @@ class Application(Thread):
         global aste
         aste = tkinter.PhotoImage(file="D:\\PycharmProjects\\Projet_1\\asteroid.png")
         global aster
-        aster = [0, 0, 0, 0]
+        aster = list()
         app.resizable(False, False)
         Asteroid()
         app.bind('f', forget)
