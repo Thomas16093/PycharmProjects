@@ -136,6 +136,7 @@ Compteur.start()
 Appli.join()
 Compteur.join()
 
+
 """import random
 import sys
 from threading import Thread
@@ -172,5 +173,41 @@ thread_2.start()
 # Attend que les threads se terminent
 thread_1.join()
 thread_2.join()"""
+
+
+# autre ancien code
+
+
+"""app = tkinter.Tk()
+app.title("Premier Jeux")
+tall_x = app.winfo_screenwidth()
+tall_y = app.winfo_screenheight()
+applier_x = 800
+applier_y = 460
+posX = (tall_x // 2) - (applier_x // 2)
+posY = (tall_y // 2) - (applier_y // 2)
+geo = "{}x{}+{}+{}".format(applier_x, applier_y, posX, posY)
+app.geometry(geo)
+C = tkinter.Canvas(app, bg="blue", height=1680, width=1050)
+filename = tkinter.PhotoImage(file="D:\\PycharmProjects\\Projet_1\\background.png")
+background_label = tkinter.Label(app, image=filename)
+C.create_image(0, 0, image=filename, tags="background")
+image = tkinter.PhotoImage(file="D:\\PycharmProjects\\Projet_1\\rocket.png")
+rocket = C.create_image(65, 50, image=image, tags="rocket")
+C.create_line(0, 105, 800, 105)
+C.create_line(0, 225, 800, 225)
+C.create_line(0, 350, 800, 350)
+C.pack()
+app.bind('<Up>', move_up)
+app.bind('<Down>', move_down)
+aste = tkinter.PhotoImage(file="D:\\PycharmProjects\\Projet_1\\asteroid.png")
+aster = list()
+# app.resizable(False, False)
+Asteroid()
+app.bind('f', forget)
+app.bind('a', appear)
+app.bind('m', move)
+app.mainloop()
+"""
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
