@@ -146,7 +146,7 @@ class Appear(Thread):
 
     def run(self):
         #time.sleep(0.5)
-        while t1.is_alive() | self.event.set():
+        while t1.is_alive():
             try:
                 time.sleep(2)
                 Asteroid()
