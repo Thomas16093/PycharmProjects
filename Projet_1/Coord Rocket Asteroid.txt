@@ -34,3 +34,11 @@ x3	y3	x4	y4
 x3 < x2 & ( y3 +3 ) == y2
 91 < 128 & ( 130 +3 ) == 203
 début asteroid < fin rocket & ( bas asteroid + écart ) = bas rocket
+
+Ou :
+
+début asteroid < fin rocket & bas rocket < bas asteroid < bas rocket + ecart avec le haut
+x3 < x2 & ( y1 < y3 < y1+(y2-y1))
+
+(début rocket < début asteroid < fin rocket ) & ( bas rocket + ecart avec le haut < bas asteroid < bas rocket )
+(x1 < x3 < x2) &  ((y1+(y2-y1) < y3 < y2)

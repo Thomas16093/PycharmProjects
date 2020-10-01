@@ -92,7 +92,7 @@ class Deplacement(Thread):
                                 C.move(aster[i], -50, 0)
                                 # print(C.bbox(aster[i]))
             except Exception:
-                break
+                pass
 
         print("Deplacement = " + str(t1.is_alive()))
         pass
@@ -118,7 +118,13 @@ class Life(Thread):
                         for i in range(len(aster)):
                             # print(C.bbox(aster[i]))
                             x3, y3, x4, y4 = C.bbox(aster[i])
-                            if x3 <= x2 & (y1 + 3) == y3:
+                            if (x1 < x3 < x2) & ((y1 + (y2 - y1)) < y3 < y2):
+                                C.delete(aster[i])
+                                vie -= 1
+                                print("Vie = " + str(vie))
+                                del aster[i]
+                                break
+                            """if x3 <= x2 & (y1 + 3) == y3:
                                 C.delete(aster[i])
                                 vie -= 1
                                 print("Vie = " + str(vie))
@@ -141,7 +147,7 @@ class Life(Thread):
                                 vie -= 1
                                 print("Vie = " + str(vie))
                                 del aster[i]
-                                break
+                                break"""
                     except TypeError:
                         pass
                     except IndexError:
