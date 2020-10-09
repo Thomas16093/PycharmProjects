@@ -42,3 +42,6 @@ x3 < x2 & ( y1 < y3 < y1+(y2-y1))
 
 (début rocket < début asteroid < fin rocket ) & ( bas rocket + ecart avec le haut < bas asteroid < bas rocket )
 (x1 < x3 < x2) &  ((y1+(y2-y1) < y3 < y2)
+(2  < 91 < 128) & ((138+(203-138) < 130 < 203)
+(2  < 91 < 128) & ((138+(65) < 130 < 203)
+		!error!

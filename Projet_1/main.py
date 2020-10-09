@@ -75,7 +75,6 @@ class Deplacement(Thread):
         Thread.__init__(self)
 
     def run(self):
-        # time.sleep(0.5)
         while t1.is_alive():  # tant que le thread principale tourne
             try:
                 time.sleep(0.5)
@@ -90,9 +89,8 @@ class Deplacement(Thread):
                             if aster[i] != 0:
                                 C.move(aster[i], -50, 0)
                                 # print(C.bbox(aster[i]))
-            except Exception:
+            except IndexError:
                 pass
-
         print("Deplacement = " + str(t1.is_alive()))
         pass
 
@@ -109,46 +107,24 @@ class Life(Thread):
         t3.start()
         time.sleep(0.5)
         t4.start()
-        vie = 0
+        vie = 3
         while t1.is_alive() & t3.is_alive() & t4.is_alive():  # Tourne tant que tout les Threads fonctionne (
             # nécessaire )
             try:
                 if vie != 0:  # tant que l'utilisateur à de la vie
                     try:
+                        time.sleep(0.1)
                         x1, y1, x2, y2 = C.bbox("rocket")  # récupère coordonnées de la Rocket
                         for i in range(len(aster)):  # Test pour tout les Asteroids
-                            # print(C.bbox(aster[i]))
                             x3, y3, x4, y4 = C.bbox(aster[i])  # récupère les coordonées de l'Asteroid
-                            if (x1 < x3 < x2) & ((y1 + (y2 - y1)) < y3 < y2):  # Doit tester si il rentre en collisions
+                            if (x1 < x3 < x2) & ((y1 - (y2 - y1)) < y3 < y2):  # Doit tester si il rentre en collisions
                                 C.delete(aster[i])
                                 vie -= 1
                                 print("Vie = " + str(vie))
                                 del aster[i]
                                 break
-                            """if x3 <= x2 & (y1 + 3) == y3:
-                                C.delete(aster[i])
-                                vie -= 1
-                                print("Vie = " + str(vie))
-                                del aster[i]
-                                break
-                            if x3 <= x2 & (y1 + 8) == y3:
-                                C.delete(aster[i])
-                                vie -= 1
-                                print("Vie = " + str(vie))
-                                del aster[i]
-                                break
-                            if x3 <= x2 & (y1 + 13) == y3:
-                                C.delete(aster[i])
-                                vie -= 1
-                                print("Vie = " + str(vie))
-                                del aster[i]
-                                break
-                            if x3 <= x2 & (y1 + 18) == y3:
-                                C.delete(aster[i])
-                                vie -= 1
-                                print("Vie = " + str(vie))
-                                del aster[i]
-                                break"""
+                            else:
+                                pass
                     except TypeError:
                         pass
                     except IndexError:
@@ -236,11 +212,10 @@ class Application(Thread):
 
         # Empêche le dimensionnement de l'application
         app.resizable(False, False)
-        Asteroid()
 
         # bind de touche manuelle / mais inutile + démarrage de l'application
         app.bind('f', forget)
-        app.bind('a', appear)
+        app.bind('a', Asteroid())
         app.bind('m', move)
         app.mainloop()
 
