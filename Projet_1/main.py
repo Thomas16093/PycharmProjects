@@ -2,10 +2,12 @@
 
 # Press Maj+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
 import mttkinter as tkinter
 import time
 from threading import Thread, Event
 import random
+import sys
 
 
 def Asteroid():  # Apparition des Asteroids
@@ -53,7 +55,7 @@ def forget(temp):  # supprimer les asteroids de l'affichage
 
 def move_up(temp):  # Deplacement vers le haut de la fusée
     x1, y1, x2, y2 = C.bbox("rocket")
-    if y1 <= 120:   # test si Rocket peut monter de 120 pixel
+    if y1 <= 120:  # test si Rocket peut monter de 120 pixel
         return
     else:
         C.move(rocket, 0, -120)
@@ -62,7 +64,7 @@ def move_up(temp):  # Deplacement vers le haut de la fusée
 
 def move_down(temp):  # Deplacement vers le bas de la fusée
     x1, y1, x2, y2 = C.bbox("rocket")
-    if y2 >= C.winfo_height() - 120:    # test si Rocket peut descendre de 120 pixel
+    if y2 >= C.winfo_height() - 120:  # test si Rocket peut descendre de 120 pixel
         return
     else:
         C.move(rocket, 0, 120)
@@ -226,8 +228,9 @@ global aster
 t1 = Application()
 t2 = Life()
 t1.start()
+t2.daemon = True  # marque t2 comme thread arrière-plan
 t2.start()
 t1.join()
-t2.join()
+sys.exit()  # arrête thread arrière-plan
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
